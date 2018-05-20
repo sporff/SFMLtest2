@@ -16,7 +16,7 @@ Rack::~Rack() {
 
 // Adds a new node to node list
 // Returns key of added node or NODE_INVALID for failure
-RackNodePairKey Rack::AddNode(RackNodePairKey nodeKey) {
+RackNodeKey Rack::AddNode(RackNodeKey nodeKey) {
 	auto ret = _nodeList.insert(std::make_pair(nodeKey, RackNode(nodeKey, this)));
 
 	// check insert return value.  if bool return is true for success, return key.
@@ -30,7 +30,7 @@ uint64_t Rack::NodeListSize() {
 
 // Get pointer to a node in the list
 // Returns pointer on success and 'nullptr' on failure
-RackNode* Rack::GetNode(RackNodePairKey nodeKey) {
+RackNode* Rack::GetNode(RackNodeKey nodeKey) {
 	auto iter = _nodeList.find(nodeKey);
 
 	if (iter != _nodeList.end())
@@ -47,7 +47,7 @@ RackNode* Rack::GetNode(RackNodePairKey nodeKey) {
 // Adds a new edge to edge list
 // Returns key of added edge or EDGE_INVALID for failure
 // Full rollback for any error
-RackEdgeKey Rack::AddEdge(RackNodePairKey nodeKeyA, RackNodePairKey nodeKeyB) {
+RackEdgeKey Rack::AddEdge(RackNodeKey nodeKeyA, RackNodeKey nodeKeyB) {
 	// Validate and locate nodes
 	RackNode *pNodeA, *pNodeB;
 	pNodeA = GetNode(nodeKeyA);

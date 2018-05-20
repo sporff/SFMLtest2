@@ -6,13 +6,13 @@ RackNode::RackNode() {
 };
 
 
-RackNode::RackNode(RackNodePairKey thisKey, Rack *pParentRack) {
+RackNode::RackNode(RackNodeKey thisKey, Rack *pParentRack) {
 	_thisKey = thisKey;
 	_pParentRack = pParentRack;
 }
 
 
-const RackNodePairKey RackNode::GetKey() {
+const RackNodeKey RackNode::GetKey() {
 	return _thisKey;
 }
 
@@ -28,7 +28,7 @@ RackEdgeKey RackNode::AddEdge(RackEdgeKey edgeKey) {
 	return (ret.second ? *(ret.first) : EDGE_INVALID);		// return key from added element or EDGE_INVALID
 }
 
-RackNodePairKey RackNode::RemoveEdge(RackEdgeKey edgeKey) {
+RackNodeKey RackNode::RemoveEdge(RackEdgeKey edgeKey) {
 	// Worry about this later
 	return NODE_INVALID;
 }
@@ -41,16 +41,16 @@ RackNodePairKey RackNode::RemoveEdge(RackEdgeKey edgeKey) {
 ///// STATIC MEMBERS
 
 // Make a 64 bit node key from 32 bit position components
-RackNodePairKey RackNode::MakeKey(RackNodeKeyComponent row, RackNodeKeyComponent column) {
-	return (static_cast<RackNodePairKey>(column) << 32) | static_cast<RackNodePairKey>(row);
+RackNodeKey RackNode::MakeKey(RackNodeKeyComponent row, RackNodeKeyComponent column) {
+	return (static_cast<RackNodeKey>(column) << 32) | static_cast<RackNodeKey>(row);
 }
 
 // Extract 32 bit row from 64 bit node key
-RackNodeKeyComponent RackNode::UnpackKeyRow(RackNodePairKey nodeKey) {
+RackNodeKeyComponent RackNode::UnpackKeyRow(RackNodeKey nodeKey) {
 	return static_cast<RackNodeKeyComponent>(0x00000000FFFFFFFF & nodeKey);
 }
 
 // Extract 32 bit column from 64 bit node key
-RackNodeKeyComponent RackNode::UnpackKeyColumn(RackNodePairKey nodeKey) {
+RackNodeKeyComponent RackNode::UnpackKeyColumn(RackNodeKey nodeKey) {
 	return static_cast<RackNodeKeyComponent>((0xFFFFFFFF00000000 & nodeKey) >> 32);
 }

@@ -6,7 +6,7 @@ RackEdge::RackEdge() {
 };
 
 
-RackEdge::RackEdge(RackEdgeKey thisKey, Rack *pParentRack, RackNodePairKey nodeKeyA, RackNodePairKey nodeKeyB, double length) {
+RackEdge::RackEdge(RackEdgeKey thisKey, Rack *pParentRack, RackNodeKey nodeKeyA, RackNodeKey nodeKeyB, double length) {
 	_thisKey = thisKey;
 	_pParentRack = pParentRack;
 
@@ -28,7 +28,7 @@ RackEdgeKey RackEdge::GetKey() {
 }
 
 
-RackNodePairKey RackEdge::GetNode(int index) {
+RackNodeKey RackEdge::GetNode(int index) {
 	if (index == 0 || index == 1) {
 		return this->_endNodes[index];
 	}
@@ -36,7 +36,7 @@ RackNodePairKey RackEdge::GetNode(int index) {
 	return NODE_INVALID;
 }
 
-RackNodePairKey RackEdge::GetOtherNodeKey(RackNodePairKey nodeKey) {
+RackNodeKey RackEdge::GetOtherNodeKey(RackNodeKey nodeKey) {
 	if (nodeKey == _endNodes[0])
 		return _endNodes[1];
 	else if (nodeKey == _endNodes[1])
